@@ -1,10 +1,11 @@
-import panels.Panel;
+import panels.MenuPanel;
+import panels.NovicePanel;
 
 import javax.swing.*;
 
 public class Game extends JFrame {
     public Game() {
-//        add(new Panel());
+        add(new NovicePanel());
         setTitle("Minesweeper");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
