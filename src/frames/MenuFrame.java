@@ -5,6 +5,7 @@ import panels.MenuPanel;
 
 import javax.swing.*;
 import java.awt.*;
+
 public class MenuFrame extends JFrame {
     public MenuFrame() {
         setTitle("Sapper");
@@ -25,8 +26,5 @@ public class MenuFrame extends JFrame {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
-
     }
-
-
 }

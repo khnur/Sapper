@@ -1,6 +1,6 @@
 package sprites;
 
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.Color;
 
@@ -19,6 +19,7 @@ public class Button extends JButton {
         setPreferredSize(new Dimension(width, height));
         setBackground(color);
     }
+
     public void setColor(Color color) {
         setBackground(color);
     }

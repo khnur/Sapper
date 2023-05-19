@@ -9,7 +9,11 @@ public abstract class Game extends JFrame {
     public static final String title = "Sapper";
     private final ScorePanel scorePanel;
     private final GamePanel gamePanel;
-    public Game(int width, int height, int rows, int cols, int totalMines) {
+    private final String level;
+
+    public Game(int width, int height, int rows, int cols, int totalMines, String level) {
+        this.level = level;
+
         setTitle("Sapper");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
@@ -24,6 +28,7 @@ public abstract class Game extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
+
     public void gameOver(String message) {
         int time = scorePanel.stopTimer();
         message += "\nTime: " + time;
@@ -34,8 +39,13 @@ public abstract class Game extends JFrame {
         this.dispose();
         new MenuFrame();
     }
+
     public void calcMine(char c) {
         if (c == '+') scorePanel.removeMine();
         else scorePanel.addMine();
+    }
+
+    public String getLevel() {
+        return level;
     }
 }

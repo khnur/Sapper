@@ -125,9 +125,9 @@ public class GamePanel extends JPanel {
         if (mineGrid[row][col]) {
             gridButtons[row][col].setText("X");
             gridButtons[row][col].setColor(Color.RED);
-            game.gameOver("Game Over");
+            gameOver("Game Over");
         } else if (remainingCells == totalMines) {
-            game.gameOver("You Win");
+            gameOver("You Win");
         } else if (adjacentMines[row][col] == ' ') {
             if (row > 0 && col > 0)
                 revealCell(row - 1, col - 1);
@@ -146,6 +146,17 @@ public class GamePanel extends JPanel {
             if (row < rows - 1 && col < cols - 1)
                 revealCell(row + 1, col + 1);
         }
+    }
+
+    private void gameOver(String message) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (!mineGrid[i][j]) continue;
+                gridButtons[i][j].setText("X");
+                gridButtons[i][j].setColor(Color.RED);
+            }
+        }
+        game.gameOver(message);
     }
 
 
