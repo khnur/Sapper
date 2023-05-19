@@ -1,12 +1,12 @@
 package panels;
 
-import frames.MenuFrame;
+import frames.AdvancedFrame;
+import frames.MediumFrame;
+import frames.NoviceFrame;
 import sprites.Button;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MenuPanel extends JPanel {
     public static final int WIDTH = 200;
@@ -14,8 +14,10 @@ public class MenuPanel extends JPanel {
     private final int rows = 4;
     private final int cols = 1;
     private final Button[][] buttons;
+    private final JFrame jFrame;
 
-    public MenuPanel() {
+    public MenuPanel(JFrame jFrame) {
+        this.jFrame = jFrame;
         buttons = new Button[rows][cols];
 
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -37,10 +39,17 @@ public class MenuPanel extends JPanel {
                 buttonColor = Color.GRAY;
             }
             buttons[i][0] = new Button(texts[i], buttonColor);
-            buttons[i][0].addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-
+            int j = i;
+            buttons[i][0].addActionListener(e -> {
+                jFrame.dispose();
+                if (j == 0) {
+                    new NoviceFrame();
+                } else if (j == 1) {
+                    new MediumFrame();
+                } else if (j == 2) {
+                    new AdvancedFrame();
+                } else {
+                    System.exit(0);
                 }
             });
             add(buttons[i][0], BorderLayout.CENTER);

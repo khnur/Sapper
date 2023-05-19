@@ -1,25 +1,21 @@
 package frames;
 
 import panels.GamePanel;
-import panels.NovicePanel;
 import panels.ScorePanel;
 
 import javax.swing.*;
 
-public class Game extends JFrame {
+public abstract class Game extends JFrame {
     public static final String title = "Sapper";
-    private ScorePanel scorePanel;
-    private GamePanel gamePanel;
-    public Game() {
+    private final ScorePanel scorePanel;
+    private final GamePanel gamePanel;
+    public Game(int width, int height, int rows, int cols, int totalMines) {
         setTitle("Sapper");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
-        createGame();
-    }
-    public void createGame() {
-        gamePanel = new NovicePanel(this);
-        scorePanel = new ScorePanel(this, gamePanel.getTotalMines());
+        gamePanel = new GamePanel(width, height, rows, cols, totalMines, this);
+        scorePanel = new ScorePanel(this, totalMines);
 
         add(scorePanel);
         add(gamePanel);
@@ -33,7 +29,10 @@ public class Game extends JFrame {
         message += "\nTime: " + time;
         JOptionPane.showMessageDialog(this, message, title, JOptionPane.INFORMATION_MESSAGE);
         scorePanel.restartTimer();
-        gamePanel.resetGame();
+//        gamePanel.resetGame();
+
+        this.dispose();
+        new MenuFrame();
     }
     public void calcMine(char c) {
         if (c == '+') scorePanel.removeMine();

@@ -8,7 +8,7 @@ import java.awt.*;
 public class MenuFrame extends JFrame {
     public MenuFrame() {
         setTitle("Sapper");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
         add(new JPanel() {
@@ -20,7 +20,7 @@ public class MenuFrame extends JFrame {
             }
         });
 
-        add(new MenuPanel());
+        add(new MenuPanel(this));
 
         pack();
         setLocationRelativeTo(null);

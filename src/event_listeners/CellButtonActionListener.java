@@ -18,6 +18,7 @@ public class CellButtonActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (gamePanel.getIsMarked(row, col)) return;
         gamePanel.revealCell(row, col);
     }
 }

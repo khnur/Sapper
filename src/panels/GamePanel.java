@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-public abstract class GamePanel extends JPanel {
+public class GamePanel extends JPanel {
     private final int WIDTH;
     private final int HEIGHT;
     private final int rows;
@@ -37,13 +37,11 @@ public abstract class GamePanel extends JPanel {
         this.buttonColor = Color.GREEN;
 
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
-    }
-
-    protected void createGUI() {
         setLayout(new GridLayout(rows, cols));
+        startGame();
     }
 
-    protected void startGame() {
+    public void startGame() {
         running = true;
         random = new Random();
 
@@ -105,7 +103,6 @@ public abstract class GamePanel extends JPanel {
                 if (i < rows - 1 && j < cols - 1 && mineGrid[i + 1][j + 1])
                     count++;
 
-//                    gridButtons[i][j].setText(count > 0 ? String.valueOf(count) : "");
                 adjacentMines[i][j] = count == 0 ? ' ' : (char) (count + '0');
 
             }
@@ -127,6 +124,7 @@ public abstract class GamePanel extends JPanel {
 
         if (mineGrid[row][col]) {
             gridButtons[row][col].setText("X");
+            gridButtons[row][col].setColor(Color.RED);
             game.gameOver("Game Over");
         } else if (remainingCells == totalMines) {
             game.gameOver("You Win");
@@ -178,12 +176,9 @@ public abstract class GamePanel extends JPanel {
     public boolean getIsMarked(int row, int col) {
         return isMarked[row][col];
     }
+
     public void setIsMarked(int row, int col) {
         isMarked[row][col] = !isMarked[row][col];
-    }
-
-    public int getTotalMines() {
-        return totalMines;
     }
 
     public void calcMine(char c) {
