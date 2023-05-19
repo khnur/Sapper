@@ -24,11 +24,19 @@ public class CellButtonMouseListener extends MouseAdapter {
     }
     public void flagCell(int row, int col) {
         if (gamePanel.getRevealed(row, col)) return;
+
         JButton cellButton = gamePanel.getGridButtons(row, col);
-        if (cellButton.getText().equals(MINE_HERE)) {
+        char changeMine;
+
+        if (gamePanel.getIsMarked(row, col)) {
             cellButton.setText("");
+            changeMine = '-';
         } else {
             cellButton.setText(MINE_HERE);
+            changeMine = '+';
         }
+
+        gamePanel.setIsMarked(row, col);
+        gamePanel.calcMine(changeMine);
     }
 }

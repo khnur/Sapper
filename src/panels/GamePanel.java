@@ -22,6 +22,7 @@ public abstract class GamePanel extends JPanel {
     private Button[][] gridButtons;
     private boolean[][] mineGrid;
     private boolean[][] revealed;
+    private boolean[][] isMarked;
     private int remainingCells;
     private final Color buttonColor;
     private final Game game;
@@ -48,6 +49,7 @@ public abstract class GamePanel extends JPanel {
         gridButtons = new Button[rows][cols];
         mineGrid = new boolean[rows][cols];
         revealed = new boolean[rows][cols];
+        isMarked = new boolean[rows][cols];
         adjacentMines = new char[rows][cols];
         remainingCells = rows * cols;
 
@@ -74,7 +76,6 @@ public abstract class GamePanel extends JPanel {
             if (mineGrid[randomRow][randomCol]) continue;
             mineGrid[randomRow][randomCol] = true;
             minesPlaced++;
-
         }
     }
 
@@ -114,6 +115,8 @@ public abstract class GamePanel extends JPanel {
     public void revealCell(int row, int col) {
         if (revealed[row][col]) return;
         revealed[row][col] = true;
+
+        if (isMarked[row][col]) calcMine('-');
 
         gridButtons[row][col].setEnabled(false);
         gridButtons[row][col].setColor(null);
@@ -169,5 +172,20 @@ public abstract class GamePanel extends JPanel {
 
     public Button getGridButtons(int row, int col) {
         return gridButtons[row][col];
+    }
+
+    public boolean getIsMarked(int row, int col) {
+        return isMarked[row][col];
+    }
+    public void setIsMarked(int row, int col) {
+        isMarked[row][col] = !isMarked[row][col];
+    }
+
+    public int getTotalMines() {
+        return totalMines;
+    }
+
+    public void calcMine(char c) {
+        game.calcMine(c);
     }
 }

@@ -10,8 +10,9 @@ public class Game extends JFrame {
     private ScorePanel scorePanel;
     private GamePanel gamePanel;
     public Game() {
-        scorePanel = new ScorePanel(this);
         gamePanel = new NoviceFrame(this);
+        scorePanel = new ScorePanel(this, gamePanel.getTotalMines());
+
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         add(scorePanel);
         add(gamePanel);
@@ -29,5 +30,9 @@ public class Game extends JFrame {
         JOptionPane.showMessageDialog(this, message, title, JOptionPane.INFORMATION_MESSAGE);
         scorePanel.restartTimer();
         gamePanel.resetGame();
+    }
+    public void calcMine(char c) {
+        if (c == '+') scorePanel.removeMine();
+        else scorePanel.addMine();
     }
 }

@@ -6,16 +6,18 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ScorePanel extends JPanel {
-    private int calculatedMines;
+    private int remainingMines;
+    private final int totalMines;
     private JLabel timeLabel;
     private JLabel mineCountLabel;
     Timer timer;
     private int elapsedSeconds;
     private final Game game;
 
-    public ScorePanel(Game game) {
-        calculatedMines = 0;
-        elapsedSeconds = 0;
+    public ScorePanel(Game game, int totalMines) {
+        this.remainingMines = totalMines;
+        this.totalMines = totalMines;
+        this.elapsedSeconds = 0;
         this.game = game;
 
         createScorePanel();
@@ -24,8 +26,8 @@ public class ScorePanel extends JPanel {
 
     private void createScorePanel() {
         JPanel scorePanel = new JPanel();
-        timeLabel = new JLabel("Time: 0");
-        mineCountLabel = new JLabel("Mines: " + calculatedMines);
+        timeLabel = new JLabel("Time: " + elapsedSeconds);
+        mineCountLabel = new JLabel("Remaining Mines: " + remainingMines);
 
         scorePanel.add(mineCountLabel);
         scorePanel.add(timeLabel);
@@ -46,8 +48,22 @@ public class ScorePanel extends JPanel {
     }
     public void restartTimer() {
         timeLabel.setText("Time: 0");
+        mineCountLabel.setText("Remaining Mines: " + totalMines);
+
+        remainingMines = totalMines;
         elapsedSeconds = 0;
         timer.restart();
+    }
+
+    public void addMine() {
+        if (remainingMines >= totalMines) return;
+        remainingMines++;
+        mineCountLabel.setText("Remaining Mines: " + remainingMines);
+    }
+    public void removeMine() {
+        if (remainingMines <= 0) return;
+        remainingMines--;
+        mineCountLabel.setText("Remaining Mines: " + remainingMines);
     }
 
 }
