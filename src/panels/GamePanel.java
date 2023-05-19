@@ -2,14 +2,14 @@ package panels;
 
 import event_listeners.CellButtonActionListener;
 import event_listeners.CellButtonMouseListener;
+import frames.Game;
 import sprites.Button;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-public abstract class Panel extends JPanel {
-    private static final String title = "Sapper";
+public abstract class GamePanel extends JPanel {
     private final int WIDTH;
     private final int HEIGHT;
     private final int rows;
@@ -24,8 +24,10 @@ public abstract class Panel extends JPanel {
     private boolean[][] revealed;
     private int remainingCells;
     private final Color buttonColor;
+    private final Game game;
 
-    public Panel(int width, int height, int rows, int cols, int totalMines) {
+    public GamePanel(int width, int height, int rows, int cols, int totalMines, Game game) {
+        this.game = game;
         this.WIDTH = width;
         this.HEIGHT = height;
         this.rows = rows;
@@ -121,10 +123,10 @@ public abstract class Panel extends JPanel {
 
         if (mineGrid[row][col]) {
             gridButtons[row][col].setText("X");
-            gameOver("Game Over");
+            game.gameOver("Game Over");
         } else if (remainingCells == totalMines) {
-            gameOver("You Win");
-        } else if (gridButtons[row][col].getText().isEmpty()) {
+            game.gameOver("You Win");
+        } else if (adjacentMines[row][col] == ' ') {
             if (row > 0 && col > 0)
                 revealCell(row - 1, col - 1);
             if (row > 0)
@@ -144,12 +146,8 @@ public abstract class Panel extends JPanel {
         }
     }
 
-    private void gameOver(String message) {
-        JOptionPane.showMessageDialog(this, message, title, JOptionPane.INFORMATION_MESSAGE);
-        resetGame();
-    }
 
-    protected void resetGame() {
+    public void resetGame() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 mineGrid[i][j] = false;
@@ -165,13 +163,11 @@ public abstract class Panel extends JPanel {
         remainingCells = rows * cols;
     }
 
-    public void flagCell(int row, int col) {
-        if (revealed[row][col]) return;
-        JButton cellButton = gridButtons[row][col];
-        if (cellButton.getText().equals("F")) {
-            cellButton.setText("");
-        } else {
-            cellButton.setText("F");
-        }
+    public boolean getRevealed(int row, int col) {
+        return revealed[row][col];
+    }
+
+    public Button getGridButtons(int row, int col) {
+        return gridButtons[row][col];
     }
 }
