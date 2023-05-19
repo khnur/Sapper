@@ -1,13 +1,32 @@
 package frames;
 
-import panels.GamePanel;
+
+import panels.MenuPanel;
 
 import javax.swing.*;
+import java.awt.*;
+public class MenuFrame extends JFrame {
+    public MenuFrame() {
+        setTitle("Sapper");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
-public class MenuFrame extends GamePanel {
-    public MenuFrame(Game jFrame) {
-        super(300, 400, 1, 3, 10, jFrame);
-        createGUI();
+        add(new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                JLabel jLabel = new JLabel();
+                jLabel.setText("Select the Game level: ");
+                add(jLabel);
+            }
+        });
+
+        add(new MenuPanel());
+
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+
     }
+
 
 }

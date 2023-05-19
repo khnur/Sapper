@@ -1,6 +1,7 @@
 package frames;
 
 import panels.GamePanel;
+import panels.NovicePanel;
 import panels.ScorePanel;
 
 import javax.swing.*;
@@ -10,18 +11,21 @@ public class Game extends JFrame {
     private ScorePanel scorePanel;
     private GamePanel gamePanel;
     public Game() {
-        gamePanel = new NoviceFrame(this);
+        setTitle("Sapper");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+
+        createGame();
+    }
+    public void createGame() {
+        gamePanel = new NovicePanel(this);
         scorePanel = new ScorePanel(this, gamePanel.getTotalMines());
 
-        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         add(scorePanel);
         add(gamePanel);
-        setTitle("Minesweeper");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         pack();
         setLocationRelativeTo(null);
-
         setVisible(true);
     }
     public void gameOver(String message) {

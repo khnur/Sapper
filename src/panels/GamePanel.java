@@ -34,8 +34,9 @@ public abstract class GamePanel extends JPanel {
         this.rows = rows;
         this.cols = cols;
         this.totalMines = totalMines;
-        setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.buttonColor = Color.GREEN;
+
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
     }
 
     protected void createGUI() {
