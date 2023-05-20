@@ -2,6 +2,6 @@ package frames;
 
 public class NoviceFrame extends Game {
     public NoviceFrame() {
-        super(600, 600, 10, 10, 10, 0);
+        super(600, 600, 10, 10, 10, 1);
     }
 }

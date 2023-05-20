@@ -3,7 +3,7 @@ package panels;
 import event_listeners.CellButtonActionListener;
 import event_listeners.CellButtonMouseListener;
 import frames.Game;
-import sprites.Button;
+import main.Button;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +15,7 @@ public class GamePanel extends JPanel {
     private final int rows;
     private final int cols;
     private final int totalMines;
-    private boolean running = false;
+    private boolean started;
 
     Random random;
     private char[][] adjacentMines;
@@ -35,6 +35,7 @@ public class GamePanel extends JPanel {
         this.cols = cols;
         this.totalMines = totalMines;
         this.buttonColor = Color.GREEN;
+        this.started = false;
 
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setLayout(new GridLayout(rows, cols));
@@ -42,7 +43,6 @@ public class GamePanel extends JPanel {
     }
 
     public void startGame() {
-        running = true;
         random = new Random();
 
         gridButtons = new Button[rows][cols];
@@ -60,22 +60,32 @@ public class GamePanel extends JPanel {
                 add(gridButtons[i][j]);
             }
         }
-
-        placeMines();
-        countAdjacentMines();
     }
 
-    private void placeMines() {
+    private void placeMines(int row, int col) {
         int minesPlaced = 0;
 
         while (minesPlaced < totalMines) {
             int randomRow = (int) (random.nextDouble() * rows);
             int randomCol = (int) (random.nextDouble() * cols);
 
-            if (mineGrid[randomRow][randomCol]) continue;
+            if (mineGrid[randomRow][randomCol] || !checkInitialPlay(row, col, randomRow, randomCol)) continue;
             mineGrid[randomRow][randomCol] = true;
             minesPlaced++;
         }
+    }
+
+    private boolean checkInitialPlay(int row, int col, int mineRow, int colRow) {
+        if (mineRow == row && colRow == col) return false;
+        if (mineRow == row && colRow == col - 1) return false;
+        if (mineRow == row && colRow == col + 1) return false;
+        if (mineRow == row - 1 && colRow == col) return false;
+        if (mineRow == row - 1 && colRow == col + 1) return false;
+        if (mineRow == row - 1 && colRow == col - 1) return false;
+        if (mineRow == row + 1 && colRow == col) return false;
+        if (mineRow == row + 1 && colRow == col - 1) return false;
+        if (mineRow == row + 1 && colRow == col + 1) return false;
+        return true;
     }
 
     private void countAdjacentMines() {
@@ -111,6 +121,11 @@ public class GamePanel extends JPanel {
 
 
     public void revealCell(int row, int col) {
+        if (!started) {
+            placeMines(row, col);
+            countAdjacentMines();
+            started = true;
+        }
         if (revealed[row][col]) return;
         revealed[row][col] = true;
 
@@ -160,7 +175,6 @@ public class GamePanel extends JPanel {
         game.gameOver(message, won);
     }
 
-
     public void resetGame() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -172,8 +186,6 @@ public class GamePanel extends JPanel {
             }
         }
 
-        placeMines();
-        countAdjacentMines();
         remainingCells = rows * cols;
     }
 

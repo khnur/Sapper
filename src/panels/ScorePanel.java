@@ -1,8 +1,8 @@
 package panels;
 
 import frames.Game;
-import frames.MenuFrame;
-import sprites.Button;
+import main.Button;
+import main.Main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +18,7 @@ public class ScorePanel extends JPanel {
     Timer timer;
     private final int gameLevel;
     private int elapsedSeconds;
-    private static final int[] records = new int[] {Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE};
+    private static final int[] records = new int[] {-1, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE};
     private final Game game;
     private final Color background;
 
@@ -74,15 +74,13 @@ public class ScorePanel extends JPanel {
         Button newGame = new Button("New Game", 100, 30, Color.CYAN);
         newGame.setToolTipText("New Game");
         newGame.addActionListener(e -> {
-            game.dispose();
-            new MenuFrame();
+            Main.newFrame(game, 0);
         });
 
         Button exitGame = new Button("Exit", 60, 30, Color.LIGHT_GRAY);
         exitGame.setToolTipText("Exit Game");
         exitGame.addActionListener(e -> {
-            game.dispose();
-            System.exit(0);
+            Main.newFrame(game, -1);
         });
 
         JPanel eastPanel = new JPanel();

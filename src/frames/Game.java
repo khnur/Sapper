@@ -1,5 +1,6 @@
 package frames;
 
+import main.Main;
 import panels.GamePanel;
 import panels.ScorePanel;
 
@@ -13,9 +14,9 @@ public abstract class Game extends JFrame {
     private final GamePanel gamePanel;
     public static final Map<Integer, String> levelmap = new HashMap<>() {
         {
-            put(0, "Beginner");
-            put(1, "Medium");
-            put(2, "Hard");
+            put(1, "Beginner");
+            put(2, "Medium");
+            put(3, "Hard");
         }
     };
 
@@ -43,8 +44,7 @@ public abstract class Game extends JFrame {
         scorePanel.restartTimer();
 //        gamePanel.resetGame();
 
-        this.dispose();
-        new MenuFrame();
+        Main.newFrame(this, 0);
     }
 
     public void calcMine(boolean plus) {

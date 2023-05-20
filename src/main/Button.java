@@ -1,4 +1,4 @@
-package sprites;
+package main;
 
 import javax.swing.*;
 import java.awt.Dimension;

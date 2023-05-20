@@ -1,9 +1,7 @@
 package panels;
 
-import frames.AdvancedFrame;
-import frames.MediumFrame;
-import frames.NoviceFrame;
-import sprites.Button;
+import main.Button;
+import main.Main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,16 +39,7 @@ public class MenuPanel extends JPanel {
             buttons[i][0] = new Button(texts[i], buttonColor);
             int j = i;
             buttons[i][0].addActionListener(e -> {
-                jFrame.dispose();
-                if (j == 0) {
-                    new NoviceFrame();
-                } else if (j == 1) {
-                    new MediumFrame();
-                } else if (j == 2) {
-                    new AdvancedFrame();
-                } else {
-                    System.exit(0);
-                }
+                Main.newFrame(jFrame, j + 1);
             });
             add(buttons[i][0], BorderLayout.CENTER);
         }
