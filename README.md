@@ -21,7 +21,7 @@ To build and run the game, follow these steps:
 * Build the game by running the following command:
 `javac -cp . Main.java`
 * Run the game by executing the following command:
-`java Main`
+`java -cp . Main`
 * Once the desktop application opens, you can start playing the game.
 ## How to Play
 The game follows the rules of traditional Minesweeper. Your objective is to uncover all the cells on the grid that do not contain mines. Here's a brief overview of the controls:
