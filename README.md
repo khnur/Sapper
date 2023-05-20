@@ -19,7 +19,7 @@ To build and run the game, follow these steps:
 
 * Make sure you have the appropriate version of Java applied to your system's PATH environment variable. If Java is not set up correctly, the game will not build or run properly.
 * Build the game by running the following command:
-`javac Main.java`
+`javac -cp . Main.java`
 * Run the game by executing the following command:
 `java Main`
 * Once the desktop application opens, you can start playing the game.
