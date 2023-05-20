@@ -13,17 +13,19 @@ public class Sound {
     private static Clip mouseClip;
     private static Clip clickClip;
 
-    private static final String pathToLost = "assets/sounds/lost.wav";
-    private static final String pathToStartClick = "assets/sounds/startClick.wav";
-    private static final String pathToStart = "assets/sounds/start.wav";
-    private static final String pathToMine = "assets/sounds/mine.wav";
-    private static final String pathToWin = "assets/sounds/win.wav";
-    private static final String pathToMouse = "assets/sounds/mouse.wav";
-    private static final String pathToClick = "assets/sounds/click.wav";
+    private static final String root = System.getProperty("user.dir") + "\\sounds\\sounds\\";
+    private static final String pathToLost = root + "lost.wav";
+    private static final String pathToStartClick = root + "startClick.wav";
+    private static final String pathToStart = root + "start.wav";
+    private static final String pathToMine = root + "mine.wav";
+    private static final String pathToWin = root + "win.wav";
+    private static final String pathToMouse = root + "mouse.wav";
+    private static final String pathToClick = root + "click.wav";
 
     private static Clip initSound(String path) {
         try {
             File soundFile = new File(path);
+            System.out.println(soundFile.getPath());
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);

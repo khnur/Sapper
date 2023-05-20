@@ -48,7 +48,8 @@ public class ScorePanel extends JPanel {
         mineCountLabel.setFont(font);
 
         recordLabel = new JLabel("Record: " +
-                (records[gameLevel] == Integer.MAX_VALUE ? Character.toString('∞') : records[gameLevel]));
+                (records[gameLevel] == Integer.MAX_VALUE ? "NA" : records[gameLevel]));
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAaa");
         recordLabel.setForeground(Color.WHITE);
         recordLabel.setFont(font);
 
