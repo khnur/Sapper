@@ -1,6 +1,7 @@
 package event_listeners;
 
 import panels.GamePanel;
+import sounds.Sound;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,7 @@ public class CellButtonActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Sound.playClick();
         if (gamePanel.getIsMarked(row, col)) return;
         gamePanel.revealCell(row, col);
     }

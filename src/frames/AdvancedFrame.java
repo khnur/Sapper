@@ -2,6 +2,6 @@ package frames;
 
 public class AdvancedFrame extends Game {
     public AdvancedFrame() {
-        super(1900, 1000, 20, 32, 99, 3);
+        super(1800, 1000, 16, 32, 99, 3);
     }
 }

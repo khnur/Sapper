@@ -3,6 +3,7 @@ package frames;
 import main.Manager;
 import panels.GamePanel;
 import panels.ScorePanel;
+import sounds.Sound;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -21,6 +22,8 @@ public abstract class Game extends JFrame {
     };
 
     public Game(int width, int height, int rows, int cols, int totalMines, int level) {
+        Sound.playStart();
+
         setTitle("Sapper");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
@@ -37,7 +40,12 @@ public abstract class Game extends JFrame {
     }
 
     public void gameOver(String message, boolean won) {
-        if (won) scorePanel.updateRecord();
+        if (won) {
+            scorePanel.updateRecord();
+            Sound.playWin();
+        } else {
+            Sound.playMine();
+        }
         int time = scorePanel.stopTimer();
         message += "\nTime: " + time + "\nRecord: " + (scorePanel.getRecord() == Integer.MAX_VALUE ? "NA" : scorePanel.getRecord());
         JOptionPane.showMessageDialog(this, message, title, JOptionPane.INFORMATION_MESSAGE);

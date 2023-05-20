@@ -4,6 +4,7 @@ import event_listeners.CellButtonActionListener;
 import event_listeners.CellButtonMouseListener;
 import frames.Game;
 import main.Button;
+import sounds.Sound;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,6 +37,7 @@ public class GamePanel extends JPanel {
         this.totalMines = totalMines;
         this.buttonColor = Color.GREEN;
         this.started = false;
+        this.random = new Random();
 
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setLayout(new GridLayout(rows, cols));
@@ -43,8 +45,6 @@ public class GamePanel extends JPanel {
     }
 
     public void startGame() {
-        random = new Random();
-
         gridButtons = new Button[rows][cols];
         mineGrid = new boolean[rows][cols];
         revealed = new boolean[rows][cols];
@@ -122,6 +122,7 @@ public class GamePanel extends JPanel {
 
     public void revealCell(int row, int col) {
         if (!started) {
+            Sound.playStartClick();
             placeMines(row, col);
             countAdjacentMines();
             started = true;

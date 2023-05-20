@@ -1,6 +1,7 @@
 package event_listeners;
 
 import panels.GamePanel;
+import sounds.Sound;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -24,6 +25,7 @@ public class CellButtonMouseListener extends MouseAdapter {
     }
     public void flagCell(int row, int col) {
         if (gamePanel.getRevealed(row, col)) return;
+        Sound.playMouse();
 
         JButton cellButton = gamePanel.getGridButtons(row, col);
         boolean changeMine;
