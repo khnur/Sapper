@@ -1,5 +1,4 @@
 import frames.MenuFrame;
-import frames.NoviceFrame;
 
 import javax.swing.*;
 

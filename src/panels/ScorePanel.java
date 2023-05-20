@@ -8,23 +8,28 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ScorePanel extends JPanel {
+    private static final int LABEL_WIDTH = 10;
     private int remainingMines;
     private final int totalMines;
     private JLabel timeLabel;
     private JLabel mineCountLabel;
     private JLabel levelLabel;
+    private JLabel recordLabel;
     Timer timer;
+    private final int gameLevel;
     private int elapsedSeconds;
+    private static final int[] records = new int[] {Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE};
     private final Game game;
     private final Color background;
 
-    public ScorePanel(Game game, int totalMines) {
+    public ScorePanel(Game game, int totalMines, int gameLevel) {
         super(new BorderLayout());
         this.remainingMines = totalMines;
         this.totalMines = totalMines;
         this.elapsedSeconds = 0;
         this.game = game;
         this.background = new Color(0, 100, 0);
+        this.gameLevel = gameLevel;
 
         setBackground(background);
         createScorePanel();
@@ -42,7 +47,12 @@ public class ScorePanel extends JPanel {
         mineCountLabel.setForeground(Color.WHITE);
         mineCountLabel.setFont(font);
 
-        levelLabel = new JLabel(game.getLevel());
+        recordLabel = new JLabel("Record: " +
+                (records[gameLevel] == Integer.MAX_VALUE ? Character.toString('∞') : records[gameLevel]));
+        recordLabel.setForeground(Color.WHITE);
+        recordLabel.setFont(font);
+
+        levelLabel = new JLabel(Game.levelmap.get(gameLevel));
         levelLabel.setFont(font);
         levelLabel.setBackground(Color.WHITE);
         levelLabel.setForeground(Color.BLACK);
@@ -54,7 +64,10 @@ public class ScorePanel extends JPanel {
 
         JPanel centerPanel = new JPanel();
         centerPanel.add(mineCountLabel);
+        centerPanel.add(Box.createRigidArea(new Dimension(LABEL_WIDTH, 0)));
         centerPanel.add(timeLabel);
+        centerPanel.add(Box.createRigidArea(new Dimension(LABEL_WIDTH, 0)));
+        centerPanel.add(recordLabel);
         centerPanel.setBackground(background);
         add(centerPanel, BorderLayout.CENTER);
 
@@ -114,4 +127,11 @@ public class ScorePanel extends JPanel {
         mineCountLabel.setText("Remaining Mines: " + remainingMines);
     }
 
+    public void updateRecord() {
+        records[gameLevel] = Math.min(records[gameLevel], elapsedSeconds);
+        recordLabel.setText("Record: " + records[gameLevel]);
+    }
+    public int getRecord() {
+        return records[gameLevel];
+    }
 }

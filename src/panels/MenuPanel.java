@@ -43,11 +43,11 @@ public class MenuPanel extends JPanel {
             buttons[i][0].addActionListener(e -> {
                 jFrame.dispose();
                 if (j == 0) {
-                    new NoviceFrame(texts[j]);
+                    new NoviceFrame();
                 } else if (j == 1) {
-                    new MediumFrame(texts[j]);
+                    new MediumFrame();
                 } else if (j == 2) {
-                    new AdvancedFrame(texts[j]);
+                    new AdvancedFrame();
                 } else {
                     System.exit(0);
                 }

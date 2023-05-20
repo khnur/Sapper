@@ -114,7 +114,7 @@ public class GamePanel extends JPanel {
         if (revealed[row][col]) return;
         revealed[row][col] = true;
 
-        if (isMarked[row][col]) calcMine('-');
+        if (isMarked[row][col]) calcMine(false);
 
         gridButtons[row][col].setEnabled(false);
         gridButtons[row][col].setColor(null);
@@ -125,9 +125,9 @@ public class GamePanel extends JPanel {
         if (mineGrid[row][col]) {
             gridButtons[row][col].setText("X");
             gridButtons[row][col].setColor(Color.RED);
-            gameOver("Game Over");
+            gameOver("Game Over", false);
         } else if (remainingCells == totalMines) {
-            gameOver("You Win");
+            gameOver("You Won", true);
         } else if (adjacentMines[row][col] == ' ') {
             if (row > 0 && col > 0)
                 revealCell(row - 1, col - 1);
@@ -148,15 +148,16 @@ public class GamePanel extends JPanel {
         }
     }
 
-    private void gameOver(String message) {
+    private void gameOver(String message, boolean won) {
+        Color color = won ? Color.CYAN : Color.RED;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if (!mineGrid[i][j]) continue;
                 gridButtons[i][j].setText("X");
-                gridButtons[i][j].setColor(Color.RED);
+                gridButtons[i][j].setColor(color);
             }
         }
-        game.gameOver(message);
+        game.gameOver(message, won);
     }
 
 
@@ -192,7 +193,7 @@ public class GamePanel extends JPanel {
         isMarked[row][col] = !isMarked[row][col];
     }
 
-    public void calcMine(char c) {
-        game.calcMine(c);
+    public void calcMine(boolean plus) {
+        game.calcMine(plus);
     }
 }

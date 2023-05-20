@@ -4,22 +4,28 @@ import panels.GamePanel;
 import panels.ScorePanel;
 
 import javax.swing.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Game extends JFrame {
     public static final String title = "Sapper";
     private final ScorePanel scorePanel;
     private final GamePanel gamePanel;
-    private final String level;
+    public static final Map<Integer, String> levelmap = new HashMap<>() {
+        {
+            put(0, "Beginner");
+            put(1, "Medium");
+            put(2, "Hard");
+        }
+    };
 
-    public Game(int width, int height, int rows, int cols, int totalMines, String level) {
-        this.level = level;
-
+    public Game(int width, int height, int rows, int cols, int totalMines, int level) {
         setTitle("Sapper");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
         gamePanel = new GamePanel(width, height, rows, cols, totalMines, this);
-        scorePanel = new ScorePanel(this, totalMines);
+        scorePanel = new ScorePanel(this, totalMines, level);
 
         add(scorePanel);
         add(gamePanel);
@@ -29,9 +35,10 @@ public abstract class Game extends JFrame {
         setVisible(true);
     }
 
-    public void gameOver(String message) {
+    public void gameOver(String message, boolean won) {
+        if (won) scorePanel.updateRecord();
         int time = scorePanel.stopTimer();
-        message += "\nTime: " + time;
+        message += "\nTime: " + time + "\nRecord: " + (scorePanel.getRecord() == Integer.MAX_VALUE ? "NA" : scorePanel.getRecord());
         JOptionPane.showMessageDialog(this, message, title, JOptionPane.INFORMATION_MESSAGE);
         scorePanel.restartTimer();
 //        gamePanel.resetGame();
@@ -40,12 +47,8 @@ public abstract class Game extends JFrame {
         new MenuFrame();
     }
 
-    public void calcMine(char c) {
-        if (c == '+') scorePanel.removeMine();
+    public void calcMine(boolean plus) {
+        if (plus) scorePanel.removeMine();
         else scorePanel.addMine();
-    }
-
-    public String getLevel() {
-        return level;
     }
 }
