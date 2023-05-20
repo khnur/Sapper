@@ -17,12 +17,18 @@ To install the game, follow these steps:
 ## Build and Run
 To build and run the game, follow these steps:
 
-* Make sure you have the appropriate version of Java applied to your system's PATH environment variable. If Java is not set up correctly, the game will not build or run properly.
+Make sure you have the appropriate version of Java applied to your system's PATH environment variable. If Java is not set up correctly, the game will not build or run properly.
+* Run the game by executing the following command (or by double-clicking the .bat file):
+`run.bat`
+
+OR
+
 * Build the game by running the following command:
 `javac -cp . Main.java`
 * Run the game by executing the following command:
 `java -cp . Main`
-* Once the desktop application opens, you can start playing the game.
+
+Once the desktop application opens, you can start playing the game.
 ## How to Play
 The game follows the rules of traditional Minesweeper. Your objective is to uncover all the cells on the grid that do not contain mines. Here's a brief overview of the controls:
 
