@@ -2,7 +2,7 @@ package panels;
 
 import frames.Game;
 import main.Button;
-import main.Main;
+import main.Manager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -74,13 +74,13 @@ public class ScorePanel extends JPanel {
         Button newGame = new Button("New Game", 100, 30, Color.CYAN);
         newGame.setToolTipText("New Game");
         newGame.addActionListener(e -> {
-            Main.newFrame(game, 0);
+            Manager.newFrame(game, 0);
         });
 
         Button exitGame = new Button("Exit", 60, 30, Color.LIGHT_GRAY);
         exitGame.setToolTipText("Exit Game");
         exitGame.addActionListener(e -> {
-            Main.newFrame(game, -1);
+            Manager.newFrame(game, -1);
         });
 
         JPanel eastPanel = new JPanel();

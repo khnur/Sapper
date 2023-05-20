@@ -1,6 +1,6 @@
 package frames;
 
-import main.Main;
+import main.Manager;
 import panels.GamePanel;
 import panels.ScorePanel;
 
@@ -44,7 +44,7 @@ public abstract class Game extends JFrame {
         scorePanel.restartTimer();
 //        gamePanel.resetGame();
 
-        Main.newFrame(this, 0);
+        Manager.newFrame(this, 0);
     }
 
     public void calcMine(boolean plus) {

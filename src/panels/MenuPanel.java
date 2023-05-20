@@ -1,7 +1,7 @@
 package panels;
 
 import main.Button;
-import main.Main;
+import main.Manager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,7 +39,7 @@ public class MenuPanel extends JPanel {
             buttons[i][0] = new Button(texts[i], buttonColor);
             int j = i;
             buttons[i][0].addActionListener(e -> {
-                Main.newFrame(jFrame, j + 1);
+                Manager.newFrame(jFrame, j + 1);
             });
             add(buttons[i][0], BorderLayout.CENTER);
         }

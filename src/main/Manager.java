@@ -7,10 +7,7 @@ import frames.NoviceFrame;
 
 import javax.swing.*;
 
-public class Main {
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(MenuFrame::new);
-    }
+public class Manager {
     public static void newFrame(JFrame existing, int frame) {
         existing.dispose();
         switch (frame) {
