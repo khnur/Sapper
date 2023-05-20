@@ -25,7 +25,6 @@ public class Sound {
     private static Clip initSound(String path) {
         try {
             File soundFile = new File(path);
-            System.out.println(soundFile.getPath());
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);

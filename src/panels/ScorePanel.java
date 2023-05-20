@@ -49,7 +49,6 @@ public class ScorePanel extends JPanel {
 
         recordLabel = new JLabel("Record: " +
                 (records[gameLevel] == Integer.MAX_VALUE ? "NA" : records[gameLevel]));
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAaa");
         recordLabel.setForeground(Color.WHITE);
         recordLabel.setFont(font);
 
