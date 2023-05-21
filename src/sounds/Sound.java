@@ -46,6 +46,7 @@ public class Sound {
         clickClip = initSound(pathToClick);
 
     }
+
     private static void playSound(Clip clip) {
         clip.drain();
         clip.setFramePosition(0);
@@ -80,7 +81,18 @@ public class Sound {
         playSound(winClip);
     }
 
+    private static void soundWait() {
+        boolean soundRunning;
+        do {
+            soundRunning = lostClip.isRunning() || startClickClip.isRunning() ||
+                    startClip.isRunning() || mineClick.isRunning() || winClip.isRunning() ||
+                    mouseClip.isRunning() || clickClip.isRunning();
+        } while (soundRunning);
+    }
+
     public static void dispose() {
+        soundWait();
+
         lostClip.close();
         startClickClip.close();
         startClip.close();
