@@ -9,6 +9,10 @@ import sounds.Sound;
 import javax.swing.*;
 
 public class Manager {
+    public static void start() {
+        Sound.startSound();
+        SwingUtilities.invokeLater(MenuFrame::new);
+    }
     public static void newFrame(JFrame existing, int frame) {
         Sound.playClick();
 

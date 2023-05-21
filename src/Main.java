@@ -1,11 +1,7 @@
-import frames.MenuFrame;
-import sounds.Sound;
-
-import javax.swing.*;
+import main.Manager;
 
 public class Main {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(MenuFrame::new);
-        Sound.startSound();
+        Manager.start();
     }
 }
