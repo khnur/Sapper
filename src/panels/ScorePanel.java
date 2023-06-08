@@ -27,13 +27,17 @@ public class ScorePanel extends JPanel {
         this.remainingMines = totalMines;
         this.totalMines = totalMines;
         this.elapsedSeconds = 0;
+        this.timer = new Timer(1000, e -> {
+            elapsedSeconds++;
+            timeLabel.setText("Time: " + elapsedSeconds);
+        });
         this.game = game;
         this.background = new Color(0, 100, 0);
         this.gameLevel = gameLevel;
 
         setBackground(background);
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         createScorePanel();
-        startTimer();
     }
 
     private void createScorePanel() {
@@ -60,15 +64,19 @@ public class ScorePanel extends JPanel {
         JPanel westPanel = new JPanel();
         westPanel.add(levelLabel);
         westPanel.setToolTipText("Level");
+        westPanel.setLayout(new BoxLayout(westPanel, BoxLayout.X_AXIS));
         add(westPanel, BorderLayout.WEST);
 
         JPanel centerPanel = new JPanel();
+        centerPanel.add(Box.createRigidArea(new Dimension(LABEL_WIDTH, 0)));
         centerPanel.add(mineCountLabel);
         centerPanel.add(Box.createRigidArea(new Dimension(LABEL_WIDTH, 0)));
         centerPanel.add(timeLabel);
         centerPanel.add(Box.createRigidArea(new Dimension(LABEL_WIDTH, 0)));
         centerPanel.add(recordLabel);
+        centerPanel.add(Box.createRigidArea(new Dimension(LABEL_WIDTH, 0)));
         centerPanel.setBackground(background);
+        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.X_AXIS));
         add(centerPanel, BorderLayout.CENTER);
 
         Button newGame = new Button("New Game", 100, 30, Color.CYAN);
@@ -91,11 +99,7 @@ public class ScorePanel extends JPanel {
         add(eastPanel, BorderLayout.EAST);
     }
 
-    private void startTimer() {
-        timer = new Timer(1000, e -> {
-            elapsedSeconds++;
-            timeLabel.setText("Time: " + elapsedSeconds);
-        });
+    public void startTimer() {
         timer.start();
     }
 

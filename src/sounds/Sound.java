@@ -13,7 +13,8 @@ public class Sound {
     private static Clip mouseClip;
     private static Clip clickClip;
 
-    private static final String root = System.getProperty("user.dir") + "\\sounds\\sounds\\";
+    private static final String root = System.getProperty("user.dir") +
+            File.separator + "sounds" + File.separator + "sounds" + File.separator;
     private static final String pathToLost = root + "lost.wav";
     private static final String pathToStartClick = root + "startClick.wav";
     private static final String pathToStart = root + "start.wav";

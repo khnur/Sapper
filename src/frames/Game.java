@@ -59,4 +59,7 @@ public abstract class Game extends JFrame {
         if (plus) scorePanel.removeMine();
         else scorePanel.addMine();
     }
+    public void startGamePlay() {
+        scorePanel.startTimer();
+    }
 }

@@ -125,6 +125,7 @@ public class GamePanel extends JPanel {
             Sound.playStartClick();
             placeMines(row, col);
             countAdjacentMines();
+            game.startGamePlay();
             started = true;
         }
         if (revealed[row][col]) return;
