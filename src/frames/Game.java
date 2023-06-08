@@ -48,11 +48,16 @@ public abstract class Game extends JFrame {
         }
         int time = scorePanel.stopTimer();
         message += "\nTime: " + time + "\nRecord: " + (scorePanel.getRecord() == Integer.MAX_VALUE ? "NA" : scorePanel.getRecord());
-        JOptionPane.showMessageDialog(this, message, title, JOptionPane.INFORMATION_MESSAGE);
-        scorePanel.restartTimer();
-//        gamePanel.resetGame();
 
-        Manager.newFrame(this, 0);
+        int choice = JOptionPane.showOptionDialog(this, message, title,
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[] {"Replay", "OK"}, "OK");
+
+        if (choice == 0) {
+            scorePanel.restartTimer();
+            gamePanel.resetGame();
+        } else if (choice == 1) {
+            Manager.newFrame(this, 0);
+        }
     }
 
     public void calcMine(boolean plus) {

@@ -119,15 +119,19 @@ public class GamePanel extends JPanel {
         }
     }
 
+    private void startGamePlay() {
+        Sound.playStartClick();
+        game.startGamePlay();
+        started = true;
+    }
 
     public void revealCell(int row, int col) {
         if (!started) {
-            Sound.playStartClick();
             placeMines(row, col);
             countAdjacentMines();
-            game.startGamePlay();
-            started = true;
+            startGamePlay();
         }
+
         if (revealed[row][col]) return;
         revealed[row][col] = true;
 
@@ -166,6 +170,7 @@ public class GamePanel extends JPanel {
     }
 
     private void gameOver(String message, boolean won) {
+        started = false;
         Color color = won ? Color.CYAN : Color.RED;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -180,15 +185,18 @@ public class GamePanel extends JPanel {
     public void resetGame() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                mineGrid[i][j] = false;
                 revealed[i][j] = false;
+                isMarked[i][j] = false;
+
                 gridButtons[i][j].setEnabled(true);
                 gridButtons[i][j].setColor(buttonColor);
                 gridButtons[i][j].setText("");
+
             }
         }
 
         remainingCells = rows * cols;
+        startGamePlay();
     }
 
     public boolean getRevealed(int row, int col) {
