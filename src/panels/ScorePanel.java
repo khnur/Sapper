@@ -61,20 +61,24 @@ public class ScorePanel extends JPanel {
         levelLabel.setBackground(Color.WHITE);
         levelLabel.setForeground(Color.BLACK);
 
+        add(Box.createRigidArea(new Dimension(2 * LABEL_WIDTH, 0)));
+
         JPanel westPanel = new JPanel();
+        westPanel.add(Box.createRigidArea(new Dimension(LABEL_WIDTH, 0)));
         westPanel.add(levelLabel);
+        westPanel.add(Box.createRigidArea(new Dimension(LABEL_WIDTH, 0)));
         westPanel.setToolTipText("Level");
         westPanel.setLayout(new BoxLayout(westPanel, BoxLayout.X_AXIS));
         add(westPanel, BorderLayout.WEST);
 
         JPanel centerPanel = new JPanel();
-        centerPanel.add(Box.createRigidArea(new Dimension(LABEL_WIDTH, 0)));
+        centerPanel.add(Box.createRigidArea(new Dimension(2 * LABEL_WIDTH, 0)));
         centerPanel.add(mineCountLabel);
         centerPanel.add(Box.createRigidArea(new Dimension(LABEL_WIDTH, 0)));
         centerPanel.add(timeLabel);
         centerPanel.add(Box.createRigidArea(new Dimension(LABEL_WIDTH, 0)));
         centerPanel.add(recordLabel);
-        centerPanel.add(Box.createRigidArea(new Dimension(LABEL_WIDTH, 0)));
+        centerPanel.add(Box.createRigidArea(new Dimension(2 * LABEL_WIDTH, 0)));
         centerPanel.setBackground(background);
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.X_AXIS));
         add(centerPanel, BorderLayout.CENTER);
@@ -97,6 +101,8 @@ public class ScorePanel extends JPanel {
         eastPanel.setBackground(background);
         eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.X_AXIS));
         add(eastPanel, BorderLayout.EAST);
+        add(Box.createRigidArea(new Dimension(2 * LABEL_WIDTH, 0)));
+
     }
 
     public void startTimer() {
